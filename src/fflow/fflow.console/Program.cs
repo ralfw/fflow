@@ -8,10 +8,12 @@ namespace fflow.console
 	{
 		public static void Main (string[] args)
 		{
-			var session = new Session ();
-			var filesys = new FilesystemProvider ();
+			var session = new SessionRepository ();
+			var filesys = new WorkflowProvider ();
 			var proc = new ProcessProvider ();
-			var head = new Head (session, filesys, proc);
+			var configrepo = new WorkflowConfigRepository ();
+			var exec = new Executor (filesys);
+			var head = new Head (session, filesys, proc, configrepo, exec);
 			Parser.Run<Head> (args, head);
 		}
 	}

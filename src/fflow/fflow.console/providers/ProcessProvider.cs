@@ -11,8 +11,7 @@ namespace fflow.console
 			var pi = new ProcessStartInfo ("open", documentpath);
 			var p = Process.Start (pi);
 			p.WaitForExit ();
-			Logger.Current.Write (documentpath, "opened");
+			Log.Current.Append (documentpath, "opened");
 		}
 	}
-	
 }
