@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Diagnostics;
 using CLAP;
 using System.IO;
 
@@ -27,7 +28,7 @@ namespace fflow.console
 
 			documentpath = Pull_document (documentpath);
 
-			Console.WriteLine ("edit: {0}", documentpath);
+			Open_document (documentpath);
 		}
 
 
@@ -50,10 +51,25 @@ namespace fflow.console
 
 				var wipdocumentpath = Path.Combine (wippath, Path.GetFileName (documentpath));
 				File.Move (documentpath, wipdocumentpath);
+				Log (wipdocumentpath, "pull");
 				return wipdocumentpath;
 			}
 		}
 
+
+		public void Open_document(string documentpath) {
+			var pi = new ProcessStartInfo ("open", documentpath);
+			var p = Process.Start (pi);
+			p.WaitForExit ();
+			Log (documentpath, "open");
+		}
+
+
+		public void Log(string documentpath, string info) {
+			var logentry = string.Format ("{0:O}\t{1}\t{2}", DateTime.Now, Environment.UserName, info);
+			var logfilepath = documentpath + ".log";
+			File.AppendAllLines (logfilepath, new[]{ logentry });
+		}
 
 	
 		[Verb]
