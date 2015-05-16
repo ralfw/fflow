@@ -16,40 +16,23 @@ namespace fflow.console
 
 	public class Head {
 		[Verb]
-		public void Open(
-			[Aliases("p,path,w,wf,workflow,n,name"),Required] string workflowpath
-		) {
-			Console.WriteLine ("Opened workflow: {0}", workflowpath);
-		}
-
-		[Verb]
-		public void Enter(
-			[Aliases("s,station,step,n,name"),Required] string stationname
-		) {
-			
-		}
-
-		[Verb,Aliases("Get,Start,Begin")]
-		public void Pull(
-			[Aliases("d,doc,docname,f,filename,n,name"),Required] string documentfilename
-		){
-			
-		}
-
-		[Verb]
 		public void Edit(
-			[Aliases("d,doc,docname,f,filename,n,name"),Required] string documentfilename
+			[Aliases("p,path,w,wf,workflow"),Required] string workflowpath,
+			[Aliases("s,station,step"),Required] string stationname,
+			[Aliases("d,doc,docname,f,file,filename"),Required] string documentfilename
 		){
-			
+			Console.WriteLine ("edit: {0},{1},{2}", workflowpath,stationname,documentfilename);
 		}
 
-		[Verb,Aliases("End,Finish")]
+
+		[Verb]
 		public void Push(
-			[Aliases("d,doc,docname,f,filename,n,name"),Required] string documentfilename,
+			[Aliases("p,path,w,wf,workflow"),Required] string workflowpath,
+			[Aliases("s,station,step"),Required] string stationname,
+			[Aliases("d,doc,docname,f,file,filename"),Required] string documentfilename,
 			[Aliases("a,act"),Required] string action
 		){
-			
+			Console.WriteLine ("push: {0},{1},{2},{3}", workflowpath,stationname,documentfilename,action);	
 		}
-
 	}
 }
