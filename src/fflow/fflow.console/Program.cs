@@ -9,7 +9,9 @@ namespace fflow.console
 		public static void Main (string[] args)
 		{
 			var session = new Session ();
-			var head = new Head (session);
+			var filesys = new FilesystemProvider ();
+			var proc = new ProcessProvider ();
+			var head = new Head (session, filesys, proc);
 			Parser.Run<Head> (args, head);
 		}
 	}

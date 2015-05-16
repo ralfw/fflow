@@ -1,0 +1,9 @@
+{
+	"actions": [
+		{
+			"name": "end",
+			"command": "@push",
+			"args": "station3"
+		},
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"actions": [
+		{
+			"name": "next",
+			"command": "@push",
+			"args": "station2"
+		},
+		{
+			"name": "end",
+			"command": "@push",
+			"args": "station3"
+		},
+	]
+}
