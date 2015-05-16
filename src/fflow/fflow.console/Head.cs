@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using CLAP;
 using System.IO;
 
@@ -22,8 +23,21 @@ namespace fflow.console
 			workflowpath = this.session.Switch_to_workflow (workflowpath);
 			stationname = this.session.Switch_to_station (stationname);
 
-			Console.WriteLine ("edit: {0},{1},{2}", workflowpath,stationname,documentfilename);
+			var documentpath = Locate_document (workflowpath, stationname, documentfilename);
+
+			Console.WriteLine ("edit: {0}", documentpath);
 		}
+
+
+		public string Locate_document(string workflowpath, string stationname, string documentfilename) {
+			var stationpath = Directory.GetDirectories(workflowpath)
+									   .First(dp => dp.EndsWith(stationname, StringComparison.CurrentCultureIgnoreCase));
+			return Directory.GetFiles (stationpath)
+							.First (fp => fp.EndsWith (documentfilename, StringComparison.CurrentCultureIgnoreCase));
+		}
+
+
+
 
 
 		[Verb]
