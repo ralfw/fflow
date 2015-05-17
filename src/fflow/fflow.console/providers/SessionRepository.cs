@@ -9,6 +9,13 @@ namespace fflow.console.providers
 	public class SessionRepository {
 		const string SESSION_FILENAME = "session.json";
 
+
+		public Session Update(string workflowpath) {
+			var session = new Session{ WorkflowPath = workflowpath, Stationname = "" };
+			Store (session);
+			return session;
+		}
+
 		public Session Update(string workflowpath, string stationname) {
 			if (!File.Exists (SESSION_FILENAME)) {
 				var session = new Session{ WorkflowPath = workflowpath, Stationname = stationname };

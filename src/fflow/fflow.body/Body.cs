@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using fflow.body.providers;
 using fflow.body.data;
 
@@ -23,7 +24,8 @@ namespace fflow.body
 
 
 		public StationInfo[] Get_stations(string workflowpath) {
-			throw new NotImplementedException ();	
+			var stationnames = this.wfprov.Collect_stationnames (workflowpath);
+			return stationnames.Select (n => new StationInfo{ Name = n }).ToArray ();
 		}
 
 		public StationDetails[] Get_station_documents(string workflowpath, string stationname) {
@@ -66,7 +68,7 @@ namespace fflow.body
 
 
 	public struct StationInfo {
-		public string Stationname;
+		public string Name;
 	}
 		
 	public struct DocumentInfo {

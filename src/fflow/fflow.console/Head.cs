@@ -25,9 +25,9 @@ namespace fflow.console
 		public void Stations(
 			[Aliases("p,path,w,wf,workflow"), Required] string workflowpath
 		){
-			// open workflow: show stations
-			// open workflow station: show files in inbox and wip
-			throw new NotImplementedException ("Open hasn't been implemented yet.");
+			var session = this.sessionrepo.Update (workflowpath);
+			var stationinfos = this.body.Get_stations (session.WorkflowPath);
+			Display (workflowpath, stationinfos);
 		}
 
 		[Verb]
@@ -49,7 +49,7 @@ namespace fflow.console
 		){
 			var session = this.sessionrepo.Update (workflowpath, stationname);
 			var docinfo = this.body.Edit (session.WorkflowPath, session.Stationname, documentfilename);
-			Display_documentinfo (docinfo);
+			Display (docinfo);
 		}
 
 	
@@ -62,14 +62,21 @@ namespace fflow.console
 		){
 			var session = this.sessionrepo.Update (workflowpath, stationname);
 			var docinfo = this.body.Push (session.WorkflowPath, session.Stationname, documentfilename, actionname);
-			Display_documentinfo (docinfo);
+			Display (docinfo);
 		}
 
 
-		private void Display_documentinfo(DocumentInfo docinfo) {
+		private void Display(DocumentInfo docinfo) {
 			Console.WriteLine ("Document: {0}", docinfo.Documentpath);
 			foreach (var logline in docinfo.Loglines)
 				Console.WriteLine ("  {0}", logline);
+		}
+
+		private void Display(string workflowpath, StationInfo[] stationinfos) {
+			Console.WriteLine ("Workflow: {0}", workflowpath);
+			Console.WriteLine ("  Stations:");
+			foreach (var stationinfo in stationinfos)
+				Console.WriteLine ("    {0}", stationinfo.Name);
 		}
 	}
 }

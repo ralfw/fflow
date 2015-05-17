@@ -7,10 +7,21 @@ using fflow.body.data;
 namespace fflow.body.providers
 {
 	public class WorkflowProvider {
+		const string WIP_FOLDERNAME = "wip";
+
+
 		public string Locate_document(string workflowpath, string stationname, string documentfilename) {
 			var stationpath = Locate_station (workflowpath, stationname);
 			return Directory.GetFiles (stationpath, "*.*", SearchOption.AllDirectories)
 				.First (fp => fp.EndsWith (documentfilename, StringComparison.CurrentCultureIgnoreCase));
+		}
+
+
+		public string[] Collect_stationnames(string workflowpath) {
+			return Directory.GetDirectories (workflowpath, "*.*", SearchOption.AllDirectories)
+							.Where (dp => dp.EndsWith (WIP_FOLDERNAME))
+							.Select (dp => Path.GetFileName (dp.Substring (0, dp.Length - WIP_FOLDERNAME.Length - 1)))
+							.ToArray ();
 		}
 
 
@@ -21,7 +32,7 @@ namespace fflow.body.providers
 
 
 		public string Pull_document(string documentpath) {
-			const string WIP_FOLDERNAME = "wip";
+			
 
 			if (Path.GetDirectoryName (documentpath).EndsWith (WIP_FOLDERNAME))
 				return documentpath;
