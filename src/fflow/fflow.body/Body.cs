@@ -26,7 +26,8 @@ namespace fflow.body
 
 		public StationInfo[] Get_stations(string workflowpath) {
 			var stationnames = this.wfprov.Collect_stationnames (workflowpath);
-			return stationnames.Select (n => new StationInfo{ Name = n }).ToArray ();
+			return stationnames.OrderBy(n => n)
+							   .Select (n => new StationInfo{ Name = n }).ToArray ();
 		}
 
 
