@@ -17,8 +17,8 @@ namespace fflow.console
 			var wfprov = new WorkflowProvider ();
 			var proc = new ProcessProvider ();
 			var configrepo = new WorkflowConfigRepository ();
-			var exec = new ActionCommands (new PushActionCommand(wfprov));
-			var body = new Body (wfprov, proc, configrepo, exec);
+			var acmds = new ActionCommands (new PushActionCommand(wfprov));
+			var body = new Body (wfprov, proc, configrepo, acmds);
 			var head = new Head (session, console, body);
 			Parser.Run<Head> (args, head);
 		}

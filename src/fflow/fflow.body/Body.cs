@@ -11,13 +11,13 @@ namespace fflow.body
 		WorkflowProvider wfprov;
 		ProcessProvider process;
 		WorkflowConfigRepository configrepo;
-		ActionCommands exec;
+		ActionCommands acmds;
 
 		public Body (WorkflowProvider wfprov, 
 					 ProcessProvider process, WorkflowConfigRepository configrepo,
-					 ActionCommands exec)
+					 ActionCommands acmds)
 		{
-			this.exec = exec;
+			this.acmds = acmds;
 			this.configrepo = configrepo;
 			this.process = process;
 			this.wfprov = wfprov;
@@ -61,7 +61,7 @@ namespace fflow.body
 			var stationpath = this.wfprov.Locate_station (workflowpath, stationname);
 			var config = this.configrepo.Load_workflow_config (stationpath);
 
-			documentpath = this.exec.Execute (workflowpath, documentpath, actionname, config.Actions);
+			documentpath = this.acmds.Execute (workflowpath, documentpath, actionname, config.Actions);
 
 			return new DocumentInfo { 
 				Documentpath = documentpath,
