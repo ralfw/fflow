@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace fflow.body.data
 {
-	public class WorkflowConfig {
+	public struct WorkflowConfig {
 		public WorkflowConfig() {
 			this.Actions = new WorkflowAction[0];
 		}
@@ -15,7 +15,7 @@ namespace fflow.body.data
 		public WorkflowAction[] Actions { get; set; }
 	}
 		
-	public class WorkflowAction {
+	public struct WorkflowAction {
 		public string Name { get; set; }
 		public string Command { get; set; }
 		public string Args { get; set; }

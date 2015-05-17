@@ -32,13 +32,13 @@ namespace fflow.body.providers
 				var wipdocumentpath = Path.Combine (wippath, Path.GetFileName (documentpath));
 				File.Move (documentpath, wipdocumentpath);
 				var stationname = Path.GetDirectoryName (documentpath).Split (new[]{ Path.DirectorySeparatorChar }).Last ();
-				Log.Current.Append (wipdocumentpath, "pulled", stationname);
+				Log.Current.Append_to (wipdocumentpath, "pulled", stationname);
 				return wipdocumentpath;
 			}
 		}
 
 
-		public void Push_document(string documentpath, string workflowpath, string stationname) {
+		public string Push_document(string documentpath, string workflowpath, string stationname) {
 			var stationpath = Locate_station(workflowpath, stationname);
 
 			var newDocumentpath = Path.Combine (stationpath, Path.GetFileName (documentpath));
@@ -46,7 +46,9 @@ namespace fflow.body.providers
 
 			File.Move (Log.Current.Logfilepath_for(documentpath), Log.Current.Logfilepath_for(newDocumentpath));
 
-			Log.Current.Append (newDocumentpath, "pushed", stationname);
+			Log.Current.Append_to (newDocumentpath, "pushed", stationname);
+
+			return newDocumentpath;
 		}
 	}
 }

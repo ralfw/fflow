@@ -11,7 +11,7 @@ namespace fflow.body.providers
 			var pi = new ProcessStartInfo ("open", documentpath);
 			var p = Process.Start (pi);
 			p.WaitForExit ();
-			Log.Current.Append (documentpath, "opened");
+			Log.Current.Append_to (documentpath, "opened");
 		}
 	}
 }

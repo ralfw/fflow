@@ -37,7 +37,7 @@ namespace fflow.body
 			this.process.Open_document (documentpath);
 			return new DocumentInfo{ 
 				Documentpath = documentpath,
-				Loglines = Log.Current.Read(documentpath)
+				Loglines = Log.Current.Entries_for(documentpath)
 			};
 		}
 
@@ -47,11 +47,11 @@ namespace fflow.body
 			var stationpath = this.wfprov.Locate_station (workflowpath, stationname);
 			var config = this.configrepo.Load_workflow_config (stationpath);
 
-			this.exec.Run (workflowpath, documentpath, actionname, config.Actions);
+			documentpath = this.exec.Run (workflowpath, documentpath, actionname, config.Actions);
 
 			return new DocumentInfo { 
 				Documentpath = documentpath,
-				Loglines = new string[0]
+				Loglines = Log.Current.Entries_for(documentpath)
 			};
 		}
 	}

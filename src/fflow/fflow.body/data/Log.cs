@@ -6,8 +6,8 @@ using System.IO;
 namespace fflow.body.data
 {
 	interface ILog {
-		void Append (string documentpath, string @event, string info = "");
-		string[] Read (string documentpath);
+		void Append_to (string documentpath, string @event, string info = "");
+		string[] Entries_for (string documentpath);
 		string Logfilepath_for (string documentpath);
 	}
 
@@ -15,13 +15,13 @@ namespace fflow.body.data
 		public static ILog Current = new Log ();
 
 
-		public void Append(string documentpath, string @event, string info = "") {
+		public void Append_to(string documentpath, string @event, string info = "") {
 			var logentry = string.Format ("{0:O}\t{1}\t{2}\t{3}", DateTime.Now, Environment.UserName, @event, info);
 			File.AppendAllLines (Logfilepath_for(documentpath), new[]{ logentry });
 		}
 
 
-		public string[] Read(string documentpath) {
+		public string[] Entries_for(string documentpath) {
 			return File.ReadAllLines (Logfilepath_for(documentpath));
 		}
 

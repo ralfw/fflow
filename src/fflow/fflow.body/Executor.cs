@@ -8,21 +8,25 @@ using fflow.body.data;
 
 namespace fflow.body
 {
-	public class Executor {
-		Dictionary<string, Action<string,string,string>> buildinCommands;
+	public delegate string WorkflowCommandDelegate(string workflowpath, string documentpath, string actionname);
 
-		public Executor(WorkflowProvider filesys) {
-			this.buildinCommands = new Dictionary<string, Action<string, string, string>>{ 
-				{"@push", (workflowpath, documentpath, destinationStationname) => {filesys.Push_document(documentpath, workflowpath, destinationStationname);}}
+	public class Executor {
+		Dictionary<string, WorkflowCommandDelegate> buildinCommands;
+
+		public Executor(WorkflowProvider wfprov) {
+			this.buildinCommands = new Dictionary<string, WorkflowCommandDelegate> { 
+				{"@push", (workflowpath, documentpath, destinationStationname) =>
+								wfprov.Push_document (documentpath, workflowpath, destinationStationname)
+				}
 			};
 		}
 
-		public void Run(string workflowpath, string documentpath, string selectedActionname, IEnumerable<WorkflowAction> actions) {
+		public string Run(string workflowpath, string documentpath, string selectedActionname, IEnumerable<WorkflowAction> actions) {
 			var action = actions.First (a => a.Name == selectedActionname);
 
 			if (action.Command.StartsWith ("@")) {
 				if (this.buildinCommands.ContainsKey (action.Command))
-					this.buildinCommands [action.Command] (workflowpath, documentpath, action.Args);
+					return this.buildinCommands [action.Command] (workflowpath, documentpath, action.Args);
 				else
 					throw new ArgumentException ("Unkown build-in command: " + selectedActionname);
 			} else
