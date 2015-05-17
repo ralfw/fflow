@@ -10,13 +10,6 @@ namespace fflow.body.providers
 		const string WIP_FOLDERNAME = "wip";
 
 
-		public string Locate_document(string workflowpath, string stationname, string documentfilename) {
-			var stationpath = Locate_station (workflowpath, stationname);
-			return Directory.GetFiles (stationpath, "*.*", SearchOption.AllDirectories)
-				.First (fp => fp.EndsWith (documentfilename, StringComparison.CurrentCultureIgnoreCase));
-		}
-
-
 		public string[] Collect_stationnames(string workflowpath) {
 			return Directory.GetDirectories (workflowpath, "*.*", SearchOption.AllDirectories)
 							.Where (dp => dp.EndsWith (WIP_FOLDERNAME))
@@ -43,6 +36,13 @@ namespace fflow.body.providers
 				.Where (dp => dp != Log.Current.Logfilepath_for (dp))
 				.Where(dp => !Path.GetFileName(dp).StartsWith("."))
 				.ToArray ();
+		}
+
+
+		public string Locate_document(string workflowpath, string stationname, string documentfilename) {
+			var stationpath = Locate_station (workflowpath, stationname);
+			return Directory.GetFiles (stationpath, "*.*", SearchOption.AllDirectories)
+				.First (fp => fp.EndsWith (documentfilename, StringComparison.CurrentCultureIgnoreCase));
 		}
 
 

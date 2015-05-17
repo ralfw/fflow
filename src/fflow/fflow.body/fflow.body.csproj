@@ -36,7 +36,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Body.cs" />
-    <Compile Include="Executor.cs" />
     <Compile Include="providers\ProcessProvider.cs" />
     <Compile Include="providers\WorkflowConfigRepository.cs" />
     <Compile Include="providers\WorkflowProvider.cs" />
@@ -45,9 +44,15 @@
     <Compile Include="data\DocumentInfo.cs" />
     <Compile Include="data\StationDetails.cs" />
     <Compile Include="data\StationInfo.cs" />
+    <Compile Include="ActionCommands.cs" />
+    <Compile Include="builtinactioncommands\IActionCommand.cs" />
+    <Compile Include="builtinactioncommands\PushActionCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="builtinactioncommands\" />
   </ItemGroup>
 </Project>
