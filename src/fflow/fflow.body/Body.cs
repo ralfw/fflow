@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.IO;
 using fflow.body.providers;
 using fflow.body.data;
 
@@ -28,8 +29,18 @@ namespace fflow.body
 			return stationnames.Select (n => new StationInfo{ Name = n }).ToArray ();
 		}
 
-		public StationDetails[] Get_station_documents(string workflowpath, string stationname) {
-			throw new NotImplementedException ();
+
+		public StationDetails Get_station_documents(string workflowpath, string stationname) {
+			var stationpath = this.wfprov.Locate_station (workflowpath, stationname);
+			var inboxdocumentpaths = this.wfprov.Collect_inbox_documents (stationpath);
+			var wipdocumentpaths = this.wfprov.Collect_wip_documents (stationpath);
+			var config = this.configrepo.Load_workflow_config (stationpath);
+			return new StationDetails{ 
+				Name = stationname,
+				InboxDocumentnames = inboxdocumentpaths.Select(Path.GetFileName).ToArray(),
+				WIPDocumentnames = wipdocumentpaths.Select(Path.GetFileName).ToArray(),
+				Actionnames = config.Actions.Select(a => a.Name).ToArray()
+			};
 		}
 
 
@@ -56,23 +67,5 @@ namespace fflow.body
 				Loglines = Log.Current.Entries_for(documentpath)
 			};
 		}
-	}
-
-
-	public struct StationDetails {
-		public string Stationname;
-		public string[] InboxDocuments;
-		public string[] WIPDocuments;
-		public string[] Actionnames;
-	}
-
-
-	public struct StationInfo {
-		public string Name;
-	}
-		
-	public struct DocumentInfo {
-		public string Documentpath;
-		public string[] Loglines;
-	}
+	}		
 }

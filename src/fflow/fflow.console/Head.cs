@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using CLAP;
 using fflow.body;
+using fflow.body.data;
 using fflow.body.providers;
 using fflow.console.providers;
 
@@ -14,8 +15,10 @@ namespace fflow.console
 	public class Head {
 		SessionRepository sessionrepo;
 		Body body;
+		ConsoleProvider console;
 
-		public Head(SessionRepository sessionrepo, Body body) {
+		public Head(SessionRepository sessionrepo, ConsoleProvider console, Body body) {
+			this.console = console;
 			this.body = body;
 			this.sessionrepo = sessionrepo;
 		}
@@ -27,17 +30,17 @@ namespace fflow.console
 		){
 			var session = this.sessionrepo.Update (workflowpath);
 			var stationinfos = this.body.Get_stations (session.WorkflowPath);
-			Display (workflowpath, stationinfos);
+			this.console.Display (workflowpath, stationinfos);
 		}
 
 		[Verb]
 		public void Documents(
-			[Aliases("p,path,w,wf,workflow"), Required] string workflowpath,
+			[Aliases("p,path,w,wf,workflow")] string workflowpath,
 			[Aliases("s,station,step")] string stationname
 		){
-			// open workflow: show stations
-			// open workflow station: show files in inbox and wip
-			throw new NotImplementedException ("Open hasn't been implemented yet.");
+			var session = this.sessionrepo.Update (workflowpath, stationname);
+			var stationdetails = this.body.Get_station_documents (session.WorkflowPath, session.Stationname);
+			this.console.Display (workflowpath, stationdetails);
 		}
 
 
@@ -49,7 +52,7 @@ namespace fflow.console
 		){
 			var session = this.sessionrepo.Update (workflowpath, stationname);
 			var docinfo = this.body.Edit (session.WorkflowPath, session.Stationname, documentfilename);
-			Display (docinfo);
+			this.console.Display (docinfo);
 		}
 
 	
@@ -62,21 +65,7 @@ namespace fflow.console
 		){
 			var session = this.sessionrepo.Update (workflowpath, stationname);
 			var docinfo = this.body.Push (session.WorkflowPath, session.Stationname, documentfilename, actionname);
-			Display (docinfo);
-		}
-
-
-		private void Display(DocumentInfo docinfo) {
-			Console.WriteLine ("Document: {0}", docinfo.Documentpath);
-			foreach (var logline in docinfo.Loglines)
-				Console.WriteLine ("  {0}", logline);
-		}
-
-		private void Display(string workflowpath, StationInfo[] stationinfos) {
-			Console.WriteLine ("Workflow: {0}", workflowpath);
-			Console.WriteLine ("  Stations:");
-			foreach (var stationinfo in stationinfos)
-				Console.WriteLine ("    {0}", stationinfo.Name);
+			this.console.Display (docinfo);
 		}
 	}
 }

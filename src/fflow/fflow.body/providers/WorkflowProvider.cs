@@ -31,9 +31,22 @@ namespace fflow.body.providers
 		}
 
 
-		public string Pull_document(string documentpath) {
-			
+		public string[] Collect_inbox_documents(string stationpath) {
+			return Directory.GetFiles (stationpath, "*.*")
+							.Where (dp => dp != Log.Current.Logfilepath_for (dp))
+							.Where(dp => !Path.GetFileName(dp).StartsWith("."))
+							.ToArray ();
+		}
 
+		public string[] Collect_wip_documents(string stationpath) {
+			return Directory.GetFiles (Path.Combine(stationpath, WIP_FOLDERNAME), "*.*")
+				.Where (dp => dp != Log.Current.Logfilepath_for (dp))
+				.Where(dp => !Path.GetFileName(dp).StartsWith("."))
+				.ToArray ();
+		}
+
+
+		public string Pull_document(string documentpath) {
 			if (Path.GetDirectoryName (documentpath).EndsWith (WIP_FOLDERNAME))
 				return documentpath;
 			else {

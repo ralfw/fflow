@@ -42,6 +42,9 @@
     <Compile Include="providers\WorkflowProvider.cs" />
     <Compile Include="data\Log.cs" />
     <Compile Include="data\WorkflowConfig.cs" />
+    <Compile Include="data\DocumentInfo.cs" />
+    <Compile Include="data\StationDetails.cs" />
+    <Compile Include="data\StationInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -13,12 +13,13 @@ namespace fflow.console
 		public static void Main (string[] args)
 		{
 			var session = new SessionRepository ();
+			var console = new ConsoleProvider ();
 			var wfprov = new WorkflowProvider ();
 			var proc = new ProcessProvider ();
 			var configrepo = new WorkflowConfigRepository ();
 			var exec = new Executor (wfprov);
 			var body = new Body (wfprov, proc, configrepo, exec);
-			var head = new Head (session, body);
+			var head = new Head (session, console, body);
 			Parser.Run<Head> (args, head);
 		}
 	}

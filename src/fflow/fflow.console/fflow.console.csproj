@@ -44,6 +44,7 @@
     <Compile Include="Head.cs" />
     <Compile Include="data\Session.cs" />
     <Compile Include="providers\SessionRepository.cs" />
+    <Compile Include="providers\ConsoleProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
