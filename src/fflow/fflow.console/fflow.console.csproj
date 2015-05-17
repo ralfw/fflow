@@ -42,14 +42,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Head.cs" />
-    <Compile Include="Executor.cs" />
-    <Compile Include="providers\ProcessProvider.cs" />
-    <Compile Include="providers\WorkflowConfigRepository.cs" />
-    <Compile Include="data\Log.cs" />
-    <Compile Include="data\WorkflowConfig.cs" />
-    <Compile Include="providers\WorkflowProvider.cs" />
-    <Compile Include="providers\SessionRepository.cs" />
     <Compile Include="data\Session.cs" />
+    <Compile Include="providers\SessionRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -62,7 +56,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="providers\" />
+    <ProjectReference Include="..\fflow.body\fflow.body.csproj">
+      <Project>{2FD04717-EFC1-4DE1-B724-61C0AE8AC812}</Project>
+      <Name>fflow.body</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="providers\" />
   </ItemGroup>
 </Project>

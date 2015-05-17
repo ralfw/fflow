@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
 using System.Diagnostics;
-using CLAP;
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using fflow.body.data;
 
-namespace fflow.console
+namespace fflow.body.providers
 {
 	public class WorkflowConfigRepository {
 		public WorkflowConfig Load_workflow_config(string stationpath) {

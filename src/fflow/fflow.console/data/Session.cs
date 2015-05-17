@@ -1,9 +1,8 @@
 using System;
-using CLAP;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace fflow.console
+namespace fflow.console.data
 {
 	public class Session {
 		public string WorkflowPath {get;set;}

@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Diagnostics;
-using CLAP;
 using System.IO;
+using fflow.body.data;
 
-namespace fflow.console
+namespace fflow.body.providers
 {
 	public class WorkflowProvider {
 		public string Locate_document(string workflowpath, string stationname, string documentfilename) {

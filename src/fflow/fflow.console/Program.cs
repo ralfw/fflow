@@ -1,6 +1,10 @@
 ﻿using System;
-using CLAP;
 using System.IO;
+using CLAP;
+using fflow.body;
+using fflow.body.providers;
+using fflow.console.providers;
+
 
 namespace fflow.console
 {
@@ -9,11 +13,12 @@ namespace fflow.console
 		public static void Main (string[] args)
 		{
 			var session = new SessionRepository ();
-			var filesys = new WorkflowProvider ();
+			var wfprov = new WorkflowProvider ();
 			var proc = new ProcessProvider ();
 			var configrepo = new WorkflowConfigRepository ();
-			var exec = new Executor (filesys);
-			var head = new Head (session, filesys, proc, configrepo, exec);
+			var exec = new Executor (wfprov);
+			var body = new Body (wfprov, proc, configrepo, exec);
+			var head = new Head (session, body);
 			Parser.Run<Head> (args, head);
 		}
 	}

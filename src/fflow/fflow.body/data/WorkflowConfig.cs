@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
 using System.Diagnostics;
-using CLAP;
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace fflow.console
+namespace fflow.body.data
 {
 	public class WorkflowConfig {
 		public WorkflowConfig() {

@@ -1,9 +1,10 @@
 using System;
-using CLAP;
 using System.IO;
 using Newtonsoft.Json;
+using fflow.body.data;
+using fflow.console.data;
 
-namespace fflow.console
+namespace fflow.console.providers
 {
 	public class SessionRepository {
 		const string SESSION_FILENAME = "session.json";
