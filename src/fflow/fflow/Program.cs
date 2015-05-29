@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using fflow.body;
 using fflow.body.providers;
+using fflow.body.builtinactioncommands;
 
 namespace fflow
 {
@@ -22,7 +23,7 @@ namespace fflow
             var wfprov = new WorkflowProvider();
             var process = new ProcessProvider();
             var configrepo = new WorkflowConfigRepository();
-            var acmds = new ActionCommands();
+            var acmds = new ActionCommands(new PushActionCommand(wfprov));
             var body = new Body(wfprov, process, configrepo, acmds);
             var dlg = new DlgMain(body);
 

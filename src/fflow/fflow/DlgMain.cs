@@ -61,11 +61,6 @@ namespace fflow
         }
 
 
-        private void mnuExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void lstInbox_DoubleClick(object sender, EventArgs e)
         {
             var docname = ((ListBox)sender).SelectedItem.ToString();
@@ -85,7 +80,18 @@ namespace fflow
         private void mnuAction_Click(object sender, EventArgs e)
         {
             var actionname = ((ToolStripMenuItem) sender).Text;
-            MessageBox.Show("action: " + actionname);
+            var docname = this.lstWIP.SelectedItem.ToString();
+
+            var docinfo = _body.Push(_workflowpath, _stationname, docname, actionname);
+
+            this.lstLog.Items.Clear();
+            docinfo.Loglines.ToList().ForEach(ll => this.lstLog.Items.Add(ll));
+        }
+
+
+        private void mnuExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -26,8 +26,11 @@ namespace fflow.body.data
 		}
 
 
-		public string Logfilepath_for(string documentpath) {
-			return documentpath + ".log";
+		public string Logfilepath_for(string documentpath)
+		{
+		    var dirname = Path.GetDirectoryName(documentpath);
+		    var docname = Path.GetFileName(documentpath);
+		    return Path.Combine(dirname, "." + docname + ".log");
 		}
 	}
 }

@@ -63,6 +63,8 @@ namespace fflow.body.providers
 
 
 		public string Push_document(string documentpath, string workflowpath, string stationname) {
+            Log.Current.Append_to(documentpath, "pushing...", "");
+
 			var stationpath = Locate_station(workflowpath, stationname);
 
 			var newDocumentpath = Path.Combine (stationpath, Path.GetFileName (documentpath));
@@ -70,7 +72,7 @@ namespace fflow.body.providers
 
 			File.Move (Log.Current.Logfilepath_for(documentpath), Log.Current.Logfilepath_for(newDocumentpath));
 
-			Log.Current.Append_to (newDocumentpath, "pushed", stationname);
+			Log.Current.Append_to (newDocumentpath, "pushed_to", stationname);
 
 			return newDocumentpath;
 		}
