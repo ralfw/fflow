@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace fflow.body.data
 {
-	public struct WorkflowConfig {
+	public class WorkflowConfig {
 		public WorkflowConfig() {
 			this.Actions = new WorkflowAction[0];
 		}

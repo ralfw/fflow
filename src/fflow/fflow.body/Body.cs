@@ -6,8 +6,8 @@ using fflow.body.data;
 
 namespace fflow.body
 {
-	public class Body
-	{
+    public class Body : IBody
+    {
 		WorkflowProvider wfprov;
 		ProcessProvider process;
 		WorkflowConfigRepository configrepo;
