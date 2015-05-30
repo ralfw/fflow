@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fflow.body\fflow.body.csproj">
-      <Project>{2fd04717-efc1-4de1-b724-61c0ae8ac812}</Project>
+      <Project>{2FD04717-EFC1-4DE1-B724-61C0AE8AC812}</Project>
       <Name>fflow.body</Name>
     </ProjectReference>
   </ItemGroup>

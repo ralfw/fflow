@@ -70,11 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fflow.body\fflow.body.csproj">
-      <Project>{2fd04717-efc1-4de1-b724-61c0ae8ac812}</Project>
+      <Project>{2FD04717-EFC1-4DE1-B724-61C0AE8AC812}</Project>
       <Name>fflow.body</Name>
     </ProjectReference>
     <ProjectReference Include="..\fflow\fflow.csproj">
-      <Project>{66f88599-1144-4f05-9d7c-ce7dc59b74fd}</Project>
+      <Project>{66F88599-1144-4F05-9D7C-CE7DC59B74FD}</Project>
       <Name>fflow</Name>
     </ProjectReference>
   </ItemGroup>
